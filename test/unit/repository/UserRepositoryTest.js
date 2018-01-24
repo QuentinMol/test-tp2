@@ -45,3 +45,30 @@ describe("UserRepository", function() {
     });
 
 });
+
+describe("UserRepository_findOneById", function() {
+    it("should call db.write", function(){
+        var mockDb = jasmine.createSpyObj('db', ['get', 'find', 'value']);
+        mockDb.get.and.returnValue(mockDb);
+        mockDb.find.and.returnValue(mockDb);
+
+        var repository = new UserRepository(mockDb);
+        repository.findOneById(1);
+
+        expect(mockDb.find).toHaveBeenCalledWith({
+            id : 1
+        });
+        expect(mockDb.value).toHaveBeenCalledTimes(1);
+    });
+
+
+    it("should throw exception missing information", function(){
+        var repository = new UserRepository({});
+        var f = function(){
+            repository.findOneById();
+        };
+
+        expect(f).toThrow('User object is missing information')
+    });
+
+});

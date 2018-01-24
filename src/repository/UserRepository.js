@@ -39,6 +39,15 @@ UserRepository.prototype.create = function (user) {
  * @return User
  */
 UserRepository.prototype.findOneById = function (id) {
+    
+    if(!id){
+        throw 'User object is missing information';
+    }
+
+    this.db
+        .get('posts')
+       .find({ id: id })
+       .value()
 
 };
 
