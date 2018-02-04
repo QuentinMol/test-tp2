@@ -1,12 +1,11 @@
 language: node_js
 node_js:
-  - "8.2.1"
+  - "node"
 
-install:
-  - npm install newman
-
-before_script:
+before_install:
+  - npm install
   - npm start &
 
 script:
+- npm test
 - node_modules/.bin/newman run https://www.getpostman.com/collections/6bdc3692b12e95b33775
