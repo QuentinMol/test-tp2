@@ -4,6 +4,7 @@ node_js:
 
 before_install:
   - npm install
+  - npm start
 
 script:
   - node_modules/.bin/newman run https://www.getpostman.com/collections/6bdc3692b12e95b33775
