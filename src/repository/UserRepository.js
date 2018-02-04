@@ -44,10 +44,10 @@ UserRepository.prototype.findOneById = function (id) {
         throw 'User object is missing information';
     }
 
-    this.db
-        .get('posts')
-       .find({ id: id })
-       .value()
+    return this.db
+           .get('users')
+           .find({ id: id })
+           .value()
 
 };
 
