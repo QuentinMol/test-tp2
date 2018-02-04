@@ -1,3 +1,9 @@
+//Quentin Molinié - FIPA 3
+//UserRepositoryTest - Complétion
+//04/02/2018
+
+
+
 /**
  *
  * @param db
@@ -12,6 +18,7 @@ var UserRepository = function (db) {
  * @param {User} user
  */
 UserRepository.prototype.create = function (user) {
+
     if (!user) {
         throw 'User object is undefined';
     }
@@ -57,6 +64,21 @@ UserRepository.prototype.findOneById = function (id) {
  */
 UserRepository.prototype.update = function (user) {
 
+    if (!user) {
+        throw 'User object is undefined';
+    }
+
+    if (!user.id || !user.firstname || !user.lastname || !user.birthday) {
+        throw 'User object is missing information';
+    }
+
+
+    this.db
+        .get('users')
+        .find({ id: user.id })
+        .assign({ firstname: user.firstname }, { lastname: user.lastname }, { birthday: user.birthday })
+        .value()
+
 };
 
 /**
@@ -64,6 +86,15 @@ UserRepository.prototype.update = function (user) {
  * @param {number} id
  */
 UserRepository.prototype.delete = function (id) {
+
+    if(!id){
+        throw 'User object is missing information';
+    }
+
+    return this.db
+           .get('users')
+           .unset(id)
+           .value()
 
 };
 
